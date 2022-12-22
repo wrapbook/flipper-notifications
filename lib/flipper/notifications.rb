@@ -1,8 +1,32 @@
 require "flipper/notifications/version"
 
+require_relative "notifications/configuration"
+require_relative "notifications/feature_event"
+require_relative "notifications/features_subscriber"
+require_relative "notifications/webhooks"
+
 module Flipper
   module Notifications
     class Error < StandardError; end
-    # Your code goes here...
+
+    module_function
+
+    def configure
+      yield configuration if block_given?
+    end
+
+    def configuration
+      @configuration ||= Configuration.new
+    end
+
+    def notify(event:)
+      configuration.webhooks.each do |webhook|
+        configuration.scheduler.call(webhook: webhook, event: event)
+      end
+    end
+
+    def subscribe!
+      ActiveSupport::Notifications.subscribe(Flipper::Feature::InstrumentationName, FeaturesSubscriber.new)
+    end
   end
 end

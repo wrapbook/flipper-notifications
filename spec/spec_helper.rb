@@ -1,4 +1,8 @@
 require "bundler/setup"
+require "debug"
+require "webmock/rspec"
+
+require "flipper"
 require "flipper/notifications"
 
 RSpec.configure do |config|
@@ -10,5 +14,12 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.before do
+    Flipper.configure do |config|
+      adapter = Flipper::Adapters::Memory.new
+      instrumented = Flipper::Adapters::Instrumented.new(adapter, :instrumenter => ActiveSupport::Notifications)
+    end
   end
 end
