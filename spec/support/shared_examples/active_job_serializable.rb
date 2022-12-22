@@ -21,9 +21,17 @@ RSpec.shared_examples "an ActiveJob serializer" do
     end
   end
 
+  around do |ex|
+    queue_adapter = ActiveJob::Base.queue_adapter
+    ActiveJob::Base.queue_adapter = :test
+    ex.run
+  ensure
+    clear_enqueued_jobs
+    ActiveJob::Base.queue_adapter = queue_adapter
+  end
+
   before do
     ActiveJob::Base.logger.level = Logger::WARN
-    ActiveJob::Base.queue_adapter = :test
     ActiveJob::Serializers.add_serializers(serializer)
     stub_const("TestEventSerializationJob", job)
   end

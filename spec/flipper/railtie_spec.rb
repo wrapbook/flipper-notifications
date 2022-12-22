@@ -1,25 +1,27 @@
 # frozen_string_literal: true
 
+require "active_job"
+
 RSpec.describe Flipper::Notifications, skip: true do
   let(:admin) { users(:admin) }
   let(:webhook) { described_class::Webhooks::Slack.new(url: "test url") }
 
-  around do |example|
-    Current.user = admin
-
-    RSpec::Mocks.with_temporary_scope { allow(webhook).to receive(:notify) }
-    webhooks = described_class.configuration.webhooks
-
-    described_class.configure do |config|
-      config.enabled  = true
-      config.webhooks = [webhook]
+  let(:job) do
+    Class.new(ActiveJob::Base) do
+      def perform(webhook:, event:, context_markdown: nil)
+      end
     end
+  end
 
-    example.run
-  ensure
+  before do
+    stub_const("WebhookNotificationJob", job)
+
+    # Maybe there's an initialize_defaults! or something that configures all of
+    # this.  Or maybe there's a railtie tested separately...
     described_class.configure do |config|
-      config.enabled  = false
-      config.webhooks = webhooks
+      config.enabled   = true
+      config.scheduler =
+      config.webhooks  = [webhook]
     end
   end
 

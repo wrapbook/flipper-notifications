@@ -17,9 +17,7 @@ RSpec.configure do |config|
   end
 
   config.before do
-    Flipper.configure do |config|
-      adapter = Flipper::Adapters::Memory.new
-      instrumented = Flipper::Adapters::Instrumented.new(adapter, :instrumenter => ActiveSupport::Notifications)
-    end
+    Flipper.instance = Flipper.new(Flipper::Adapters::Memory.new)
   end
 end
+

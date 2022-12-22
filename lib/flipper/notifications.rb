@@ -1,3 +1,4 @@
+require "active_support/notifications"
 require "flipper/notifications/version"
 
 require_relative "notifications/configuration"
@@ -10,6 +11,8 @@ module Flipper
     class Error < StandardError; end
 
     module_function
+
+    @subscriber = nil
 
     def configure
       yield configuration if block_given?
@@ -26,7 +29,11 @@ module Flipper
     end
 
     def subscribe!
-      ActiveSupport::Notifications.subscribe(Flipper::Feature::InstrumentationName, FeaturesSubscriber.new)
+      @subscriber = ActiveSupport::Notifications.subscribe(Flipper::Feature::InstrumentationName, FeaturesSubscriber.new)
+    end
+
+    def unsubscribe!
+      ActiveSupport::Notifications.unsubscribe(@subscriber)
     end
   end
 end
