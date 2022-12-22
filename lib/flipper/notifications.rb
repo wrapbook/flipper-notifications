@@ -39,3 +39,5 @@ module Flipper
     end
   end
 end
+
+require_relative "notifications/railtie" if defined?(Rails::Railtie)
