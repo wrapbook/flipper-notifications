@@ -16,7 +16,7 @@ module Flipper
           end
         end
 
-      private
+        private
 
         def request_body(event:, context_markdown:)
           { blocks: blocks(event: event, context_markdown: context_markdown) }.to_json

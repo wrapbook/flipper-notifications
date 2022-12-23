@@ -42,21 +42,15 @@ module Flipper
         [].tap do |settings|
           settings << "The feature is now enabled for:" if feature.conditional?
 
-          if feature.enabled_groups.any?
-            settings << "- Groups: #{to_sentence(feature.enabled_groups.map(&:name).sort)}"
-          end
+          settings << "- Groups: #{to_sentence(feature.enabled_groups.map(&:name).sort)}" if feature.enabled_groups.any?
 
-          if feature.actors_value.any?
-            settings << "- Users: #{to_sentence(feature.actors_value.sort)}"
-          end
+          settings << "- Users: #{to_sentence(feature.actors_value.sort)}" if feature.actors_value.any?
 
           if feature.percentage_of_actors_value.positive?
             settings << "- #{feature.percentage_of_actors_value}% of users"
           end
 
-          if feature.percentage_of_time_value.positive?
-            settings << "- #{feature.percentage_of_time_value}% of the time"
-          end
+          settings << "- #{feature.percentage_of_time_value}% of the time" if feature.percentage_of_time_value.positive?
         end.join("\n")
       end
 
@@ -98,7 +92,7 @@ module Flipper
         when 2
           "#{words.first} and #{words.last}"
         else
-          "#{words[0...-1].join(", ")} and #{words.last}"
+          "#{words[0...-1].join(', ')} and #{words.last}"
         end
       end
     end

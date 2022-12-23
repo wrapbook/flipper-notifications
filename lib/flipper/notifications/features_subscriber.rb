@@ -13,7 +13,7 @@ module Flipper
         Flipper::Notifications.notify(event: event) if event.noteworthy?
       end
 
-    private
+      private
 
       def enabled?
         Flipper::Notifications.configuration.enabled?

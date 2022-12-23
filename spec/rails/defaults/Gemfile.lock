@@ -3,7 +3,7 @@ PATH
   specs:
     flipper-notifications (0.1.0)
       activesupport (~> 7.0)
-      flipper (~> 0.26)
+      flipper (~> 0.24)
       httparty (~> 0.17)
 
 GEM

@@ -113,14 +113,13 @@ RSpec.describe Flipper::Notifications::FeatureEvent do
     context "when the feature is partially enabled" do
       it "includes enabled groups" do
         feature.enable_group("test_group")
-        expect(markdown).to match(%r{Groups: test_group})
+        expect(markdown).to match(/Groups: test_group/)
       end
 
       it "includes enabled actors" do
         user = User.new(id: 1)
-        user2 = User.new(id: 2)
         feature.enable_actor(user)
-        expect(markdown).to match(%r{Users: #{user.flipper_id}})
+        expect(markdown).to match(/Users: #{user.flipper_id}/)
       end
 
       it "includes two actors" do
@@ -129,7 +128,7 @@ RSpec.describe Flipper::Notifications::FeatureEvent do
         feature.enable_actor(user)
         feature.enable_actor(user2)
 
-        expect(markdown).to match(%r{Users: #{user.flipper_id} and #{user2.flipper_id}})
+        expect(markdown).to match(/Users: #{user.flipper_id} and #{user2.flipper_id}/)
       end
 
       it "includes several actors" do
@@ -140,17 +139,17 @@ RSpec.describe Flipper::Notifications::FeatureEvent do
         feature.enable_actor(user2)
         feature.enable_actor(user3)
 
-        expect(markdown).to match(%r{Users: #{user.flipper_id}, #{user2.flipper_id} and #{user3.flipper_id}})
+        expect(markdown).to match(/Users: #{user.flipper_id}, #{user2.flipper_id} and #{user3.flipper_id}/)
       end
 
       it "includes percentage of actors" do
         feature.enable_percentage_of_actors(50)
-        expect(markdown).to match(%r{50% of users})
+        expect(markdown).to match(/50% of users/)
       end
 
       it "includes percentage of time" do
         feature.enable_percentage_of_time(25)
-        expect(markdown).to match(%r{25% of the time})
+        expect(markdown).to match(/25% of the time/)
       end
     end
   end

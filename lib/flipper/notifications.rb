@@ -29,7 +29,10 @@ module Flipper
     end
 
     def subscribe!
-      @subscriber = ActiveSupport::Notifications.subscribe(Flipper::Feature::InstrumentationName, FeaturesSubscriber.new)
+      @subscriber = ActiveSupport::Notifications.subscribe(
+        Flipper::Feature::InstrumentationName,
+        FeaturesSubscriber.new
+      )
     end
 
     def unsubscribe!

@@ -30,7 +30,7 @@ module Flipper
           other.is_a?(self.class) && url == other.url
         end
 
-      private
+        private
 
         def webhook_api_errors(&block)
           block.call
