@@ -19,6 +19,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    bundler-gem_version_tasks (0.2.1)
     concurrent-ruby (1.1.10)
     crack (0.4.5)
       rexml
@@ -82,6 +83,7 @@ PLATFORMS
 DEPENDENCIES
   activejob (~> 7.0)
   bundler
+  bundler-gem_version_tasks
   debug
   flipper-notifications!
   rake
