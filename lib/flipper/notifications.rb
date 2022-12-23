@@ -25,9 +25,7 @@ module Flipper
     end
 
     def notify(event:)
-      configuration.webhooks.each do |webhook|
-        configuration.scheduler.call(webhook: webhook, event: event)
-      end
+      configuration.notifiers.each { |notifier| notifier.call(event: event) }
     end
 
     def subscribe!

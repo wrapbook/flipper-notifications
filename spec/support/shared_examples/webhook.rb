@@ -11,7 +11,7 @@ RSpec.shared_examples "a webhook" do
     end
 
     it "raises a ClientError" do
-      expect { notify_webhook }.to raise_error(Flipper::Notifications::Webhooks::ClientError)
+      expect { notify_webhook }.to raise_error(Flipper::Notifications::Webhooks::ClientError, /resulted in 400/)
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.shared_examples "a webhook" do
     end
 
     it "raises a ServerError" do
-      expect { notify_webhook }.to raise_error(Flipper::Notifications::Webhooks::ServerError)
+      expect { notify_webhook }.to raise_error(Flipper::Notifications::Webhooks::ServerError, /resulted in 500/)
     end
   end
 
@@ -31,7 +31,7 @@ RSpec.shared_examples "a webhook" do
     end
 
     it "raises a NetworkError" do
-      expect { notify_webhook }.to raise_error(Flipper::Notifications::Webhooks::NetworkError)
+      expect { notify_webhook }.to raise_error(Flipper::Notifications::Webhooks::NetworkError, /network error/)
     end
   end
 end

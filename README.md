@@ -19,9 +19,61 @@ Or install it yourself as:
 
     $ gem install flipper-notifications
 
+## Dependencies
+
+* Ruby 3
+* ActiveSupport 7
+
+This gem is designed to work within a Rails app.  At the very least, you will
+need `activesupport` since that library drives instrumentation from Flipper
+itself.
+
 ## Usage
 
-TODO: Write usage instructions here
+After you initialize `Flipper`, you can also configure `Flipper::Notifications`.
+
+```ruby
+# config/initializers/flipper.rb
+
+Flipper.configure do |config|
+  config.adapter { ... }
+end
+
+Flipper::Notifications.configure do |config|
+  # You have to enable notifications; you probably only want notifications enabled in production.
+  config.enabled = true
+
+  slack_webhook = Flipper::Notifications::Webhooks::Slack.new(url: ENV.fetch("SLACK_WEBHOOK_URL"))
+
+  config.notifiers = [
+    Flipper::Notifications::Notifiers::WebhookNotifier.new(webhook: webhook)
+  ]
+end
+```
+
+### Implementing Your Own Webhooks
+
+WIP
+
+### Implementing Your Own Notifiers
+
+A `Notifier` is any object that responds to a `call` method with a keyword
+argument named `event`.  You can use a `lambda` as your notifier if you prefer.
+Using a `lambda` can come in handy if you want to provide additional context
+to your notifications.
+
+```ruby
+Flipper::Notifications.configure do |config|
+  webhook = Flipper::Notifications::Webhooks::Slack.new(url: ENV.fetch("SLACK_WEBHOOK_URL"))
+
+  notifier = ->(event:) do
+    context = "#{Rails.env} (changed by: #{Current.user.email})"
+    WebhookNotificationJob.perform_later(webhook: webhook, event: event, context_markdown: context)
+  end
+
+  config.notifiers = [notifier]
+end
+```
 
 ## Development
 

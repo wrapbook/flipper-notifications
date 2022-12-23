@@ -1,4 +1,5 @@
 *.swp
+.DS_Store
 /.bundle/
 /.yardoc
 /_yardoc/
@@ -7,6 +8,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+/**/vendor/bundle/
 
 # rspec failure tracking
 .rspec_status

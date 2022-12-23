@@ -10,9 +10,9 @@ module Flipper
       # queue_as :low
 
       retry_on Webhooks::NetworkError,
-        Webhooks::ServerError,
-        attempts: 3,
-        wait:     :exponentially_longer
+               Webhooks::ServerError,
+               attempts: 3,
+               wait:     :exponentially_longer
 
       def perform(webhook:, **webhook_args)
         webhook.notify(**webhook_args)

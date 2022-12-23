@@ -1,9 +1,23 @@
 # frozen_string_literal: true
 
+RSpec.shared_context "ActiveJob testing" do
+  include ActiveJob::TestHelper
+
+  around do |ex|
+    ActiveJob::Base.logger.level = Logger::WARN
+    queue_adapter = ActiveJob::Base.queue_adapter
+    ActiveJob::Base.queue_adapter = :test
+    clear_enqueued_jobs
+    ex.run
+  ensure
+    ActiveJob::Base.queue_adapter = queue_adapter
+  end
+end
+
 RSpec.shared_examples "an ActiveJob serializer" do
   # required_let_definitions :serializable, :serializer
 
-  include ActiveJob::TestHelper
+  include_context "ActiveJob testing"
 
   let(:job) do
     Class.new(ActiveJob::Base) do
@@ -21,17 +35,7 @@ RSpec.shared_examples "an ActiveJob serializer" do
     end
   end
 
-  around do |ex|
-    queue_adapter = ActiveJob::Base.queue_adapter
-    ActiveJob::Base.queue_adapter = :test
-    ex.run
-  ensure
-    clear_enqueued_jobs
-    ActiveJob::Base.queue_adapter = queue_adapter
-  end
-
   before do
-    ActiveJob::Base.logger.level = Logger::WARN
     ActiveJob::Serializers.add_serializers(serializer)
     stub_const("TestEventSerializationJob", job)
   end
@@ -46,4 +50,3 @@ RSpec.shared_examples "an ActiveJob serializer" do
     expect(job.last_thing).to eq(serializable)
   end
 end
-

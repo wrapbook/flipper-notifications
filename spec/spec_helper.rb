@@ -1,6 +1,8 @@
 require "bundler/setup"
 require "debug"
 require "webmock/rspec"
+require "simplecov"
+SimpleCov.start
 
 require "flipper"
 require "flipper/notifications"

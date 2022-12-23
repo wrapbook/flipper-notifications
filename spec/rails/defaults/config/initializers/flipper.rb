@@ -7,7 +7,9 @@ end
 Flipper::Notifications.configure do |config|
   config.enabled = !ENV.key?("FLIPPER_NOTIFICATIONS_DISABLED")
 
-  config.webhooks = [
-    Flipper::Notifications::Webhooks::Slack.new(url: ENV.fetch("SLACK_WEBHOOK_URL"))
+  slack_webhook = Flipper::Notifications::Webhooks::Slack.new(url: ENV.fetch("SLACK_WEBHOOK_URL"))
+
+  config.notifiers = [
+    Flipper::Notifications::Notifiers::WebhookNotifier.new(webhook: slack_webhook)
   ]
 end

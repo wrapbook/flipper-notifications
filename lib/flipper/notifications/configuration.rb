@@ -5,11 +5,10 @@ module Flipper
     class Configuration
       def initialize
         @enabled   = false
-        @scheduler = ->(webhook:, event:) {}
-        @webhooks  = []
+        @notifiers = []
       end
 
-      attr_accessor :enabled, :scheduler, :webhooks
+      attr_accessor :enabled, :notifiers
 
       def enabled?
         @enabled
