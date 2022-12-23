@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "activesupport", "~> 7.0"
-  spec.add_runtime_dependency "flipper", "~> 0.26"
+  spec.add_runtime_dependency "flipper", "~> 0.24"
   spec.add_runtime_dependency "httparty", "~> 0.17"
 
   spec.add_development_dependency "bundler"
