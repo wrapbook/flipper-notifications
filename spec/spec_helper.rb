@@ -1,4 +1,10 @@
 require "bundler/setup"
+require "debug"
+require "webmock/rspec"
+require "simplecov"
+SimpleCov.start
+
+require "flipper"
 require "flipper/notifications"
 
 RSpec.configure do |config|
@@ -11,4 +17,9 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.before do
+    Flipper.instance = Flipper.new(Flipper::Adapters::Memory.new)
+  end
 end
+
