@@ -7,6 +7,7 @@ require "flipper/notifications/notifiers/webhook_notifier"
 module Flipper
   module Notifications
     class Railtie < Rails::Railtie
+
       initializer "flipper-notifications.configure_rails_initialization" do
         Flipper::Notifications.subscribe!
 
@@ -15,6 +16,7 @@ module Flipper
           Webhooks::Serializer
         ]
       end
+
     end
   end
 end

@@ -7,6 +7,7 @@ module Flipper
   module Notifications
     module Webhooks
       class Serializer < ActiveJob::Serializers::ObjectSerializer
+
         def serialize?(argument)
           argument.is_a?(Webhook)
         end
@@ -21,6 +22,7 @@ module Flipper
         def deserialize(hash)
           hash["class"].constantize.new(**hash["attributes"].deep_symbolize_keys)
         end
+
       end
     end
   end

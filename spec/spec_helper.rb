@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "bundler/setup"
 require "debug"
 require "webmock/rspec"
@@ -22,4 +24,3 @@ RSpec.configure do |config|
     Flipper.instance = Flipper.new(Flipper::Adapters::Memory.new)
   end
 end
-

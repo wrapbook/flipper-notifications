@@ -3,6 +3,7 @@
 module Flipper
   module Notifications
     class FeatureEvent
+
       NOTEWORTHY_OPERATIONS = %w[
         add
         enable
@@ -95,6 +96,7 @@ module Flipper
           "#{words[0...-1].join(', ')} and #{words.last}"
         end
       end
+
     end
   end
 end
