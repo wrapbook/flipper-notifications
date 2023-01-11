@@ -3,6 +3,8 @@
 Rails-compatible Slack notifications when [Flipper](https://github.com/jnunemaker/flipper)
 flags are updated.
 
+![FlipperNotification](images/flipper-notifications.png)
+
 ## Installation
 
 Add this line to your application's Gemfile:
