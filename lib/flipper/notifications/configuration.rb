@@ -3,6 +3,7 @@
 module Flipper
   module Notifications
     class Configuration
+
       def initialize
         @enabled   = false
         @notifiers = []
@@ -13,6 +14,7 @@ module Flipper
       def enabled?
         @enabled
       end
+
     end
   end
 end

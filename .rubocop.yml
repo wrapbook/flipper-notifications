@@ -1,6 +1,15 @@
 AllCops:
   NewCops: enable
   SuggestExtensions: false
+  Exclude:
+    - "Gemfile"
+    - "flipper-notifications.gemspec"
+    - "Rakefile"
+    - "bin/*"
+    - "spec/rails/**/*"
+
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines_except_namespace
 
 Layout/HashAlignment:
   EnforcedColonStyle: table

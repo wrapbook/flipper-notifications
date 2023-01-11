@@ -6,6 +6,7 @@ require_relative "feature_event"
 module Flipper
   module Notifications
     class FeaturesSubscriber
+
       def call(*args)
         return unless enabled?
 
@@ -18,6 +19,7 @@ module Flipper
       def enabled?
         Flipper::Notifications.configuration.enabled?
       end
+
     end
   end
 end

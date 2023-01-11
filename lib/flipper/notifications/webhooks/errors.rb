@@ -4,6 +4,7 @@ module Flipper
   module Notifications
     module Webhooks
       class ApiError < StandardError
+
         def initialize(response)
           @response = response
         end
@@ -11,6 +12,7 @@ module Flipper
         def message
           "Webhook API call resulted in #{@response.code} response: #{@response.body}"
         end
+
       end
 
       class ClientError < ApiError; end
@@ -18,6 +20,7 @@ module Flipper
       class ServerError < ApiError; end
 
       class NetworkError < ApiError
+
         def initialize(cause)
           @cause = cause
         end
@@ -25,6 +28,7 @@ module Flipper
         def message
           "Webhook API call network error: #{cause.class.name} - #{cause.message}"
         end
+
       end
     end
   end

@@ -6,6 +6,7 @@ module Flipper
   module Notifications
     module Webhooks
       class Slack < Webhook
+
         MARKDOWN = "mrkdwn"
 
         headers "Content-type" => "application/json"
@@ -52,6 +53,7 @@ module Flipper
             ]
           }
         end
+
       end
     end
   end

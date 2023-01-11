@@ -6,6 +6,7 @@ require "flipper/notifications/webhooks/errors"
 module Flipper
   module Notifications
     class WebhookNotificationJob < ActiveJob::Base
+
       # TODO: Pull queue from configuration?
       # queue_as :low
 
@@ -17,6 +18,7 @@ module Flipper
       def perform(webhook:, **webhook_args)
         webhook.notify(**webhook_args)
       end
+
     end
   end
 end

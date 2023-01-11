@@ -6,6 +6,7 @@ module Flipper
   module Notifications
     module Notifiers
       class WebhookNotifier
+
         def initialize(webhook:)
           @webhook = webhook
         end
@@ -13,6 +14,7 @@ module Flipper
         def call(event:)
           WebhookNotificationJob.perform_later(webhook: @webhook, event: event)
         end
+
       end
     end
   end

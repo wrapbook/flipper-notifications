@@ -7,6 +7,7 @@ module Flipper
   module Notifications
     module Webhooks
       class Webhook
+
         include HTTParty
 
         default_timeout 5 # seconds
@@ -40,6 +41,7 @@ module Flipper
         rescue Errno::ECONNRESET, Timeout::Error => e
           raise NetworkError, e
         end
+
       end
     end
   end
