@@ -8,10 +8,10 @@ Gem::Specification.new do |spec|
   spec.name          = "flipper-notifications"
   spec.version       = Flipper::Notifications::VERSION
   spec.authors       = ["Joel Lubrano"]
-  spec.email         = ["joel.lubrano@gmail.com"]
+  spec.email         = ["jlubrano@wrapbook.com"]
 
   spec.summary       = %q{Rails-compatible Slack notifications for Flipper feature flags}
-  spec.homepage      = "https://github.com/jdlubrano/flipper-notifications"
+  spec.homepage      = "https://github.com/wrapbook/flipper-notifications"
   spec.license       = "MIT"
 
   spec.metadata["homepage_uri"] = spec.homepage
