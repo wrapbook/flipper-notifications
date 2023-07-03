@@ -48,7 +48,7 @@ Flipper::Notifications.configure do |config|
   slack_webhook = Flipper::Notifications::Webhooks::Slack.new(url: ENV.fetch("SLACK_WEBHOOK_URL"))
 
   config.notifiers = [
-    Flipper::Notifications::Notifiers::WebhookNotifier.new(webhook: webhook)
+    Flipper::Notifications::Notifiers::WebhookNotifier.new(webhook: slack_webhook)
   ]
 end
 ```
