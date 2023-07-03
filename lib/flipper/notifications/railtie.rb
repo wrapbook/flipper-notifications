@@ -17,6 +17,10 @@ module Flipper
         ]
       end
 
+      config.after_initialize do
+        WebhookNotificationJob.disable_sidekiq_retries
+      end
+
     end
   end
 end

@@ -7,7 +7,9 @@ module Flipper
   module Notifications
     class WebhookNotificationJob < ActiveJob::Base
 
-      sidekiq_options(retry: 0) if respond_to?(:sidekiq_options)
+      def self.disable_sidekiq_retries
+        sidekiq_options(retry: 0) if respond_to?(:sidekiq_options)
+      end
 
       # TODO: Pull queue from configuration?
       # queue_as :low
