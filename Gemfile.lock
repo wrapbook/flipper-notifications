@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    flipper-notifications (0.1.2)
+    flipper-notifications (0.1.3)
       activesupport (~> 7.0)
       flipper (~> 0.24)
       httparty (~> 0.17)
