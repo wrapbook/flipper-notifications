@@ -17,7 +17,7 @@ module Flipper
       retry_on Webhooks::NetworkError,
                Webhooks::ServerError,
                attempts: 3,
-               wait:     :exponentially_longer
+               wait:     ActiveJob.version < "7.1" ? :exponentially_longer : :polynomially_longer
 
       def perform(webhook:, **webhook_args)
         webhook.notify(**webhook_args)
