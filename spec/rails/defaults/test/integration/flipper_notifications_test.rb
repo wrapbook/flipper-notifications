@@ -7,6 +7,7 @@ class TestFlipperNotifications < Minitest::Test
   include ActiveJob::TestHelper
 
   def setup
+    Flipper.instance = Flipper.new(Flipper::Adapters::Memory.new, instrumenter: ActiveSupport::Notifications)
     @feature_name = :test_feature
   end
 
