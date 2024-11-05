@@ -45,10 +45,10 @@ module Flipper
 
           settings << "- Groups: #{to_sentence(feature.enabled_groups.map(&:name).sort)}" if feature.enabled_groups.any?
 
-          settings << "- Users: #{to_sentence(feature.actors_value.sort)}" if feature.actors_value.any?
+          settings << "- Actors: #{to_sentence(feature.actors_value.sort)}" if feature.actors_value.any?
 
           if feature.percentage_of_actors_value.positive?
-            settings << "- #{feature.percentage_of_actors_value}% of users"
+            settings << "- #{feature.percentage_of_actors_value}% of actors"
           end
 
           settings << "- #{feature.percentage_of_time_value}% of the time" if feature.percentage_of_time_value.positive?

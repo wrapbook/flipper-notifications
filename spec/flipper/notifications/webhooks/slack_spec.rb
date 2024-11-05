@@ -10,7 +10,6 @@ RSpec.describe Flipper::Notifications::Webhooks::Slack do
     subject(:notify_webhook) { webhook.notify(event: event, context_markdown: context_markdown) }
 
     let(:url) { "https://api.slack.test" }
-    let(:user) { nil }
     let(:webhook) { described_class.new(url: url) }
     let(:stub_request) { WebMock.stub_request(:post, url) }
     let(:context_markdown) { "Test (changed by: Unknown)" }
