@@ -17,7 +17,6 @@ RSpec.describe Flipper::Notifications do
   end
 
   describe "notifications" do
-    let(:admin) { users(:admin) }
     let(:webhook) { described_class::Webhooks::Slack.new(url: "test url") }
     let(:notifier) { double("notifier", call: nil) }
 
