@@ -13,11 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        rails_version:
-          - 7
-          - 7.1
-          - 7.2
-          - 8
         ruby_version:
           - 3.2
     steps:
@@ -33,4 +28,4 @@ jobs:
         run: bundle install && bundle exec appraisal install
       - name: Run tests
         working-directory: spec/rails/defaults
-        run: bundle exec appraisal rails-${{ matrix.rails_version }} rails test
+        run: bundle exec appraisal rails test
