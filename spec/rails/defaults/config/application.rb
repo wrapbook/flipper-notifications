@@ -19,7 +19,7 @@ require "rails/test_unit/railtie"
 Bundler.require(*Rails.groups)
 
 if %w[development test].include?(ENV["RAILS_ENV"])
-  Dotenv::Railtie.load
+  Dotenv::Rails.load
 end
 
 module Defaults
