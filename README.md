@@ -122,6 +122,16 @@ interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
 
+This gem tests against several versions of Rails using the [Appraisal gem](https://github.com/thoughtbot/appraisal).
+In order to run those tests locally you can do the following:
+
+```
+cd spec/rails/defaults
+bundle install
+bundle exec appraisal install
+bundle exec appraisal rails test
+```
+
 ## Releasing
 
 After merging in the new functionality to the main branch, you can run the following
