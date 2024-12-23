@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    flipper-notifications (0.1.5)
+    flipper-notifications (0.1.6)
       activesupport (>= 7, < 8.1)
       flipper (>= 0.24, < 2.0)
       httparty (~> 0.17)
@@ -101,7 +101,7 @@ PLATFORMS
   arm64-darwin-23
 
 DEPENDENCIES
-  activejob (~> 7.0)
+  activejob (>= 7, < 8.1)
   bundler
   bundler-gem_version_tasks
   debug
