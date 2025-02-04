@@ -38,6 +38,15 @@ module Flipper
     def unsubscribe!
       ActiveSupport::Notifications.unsubscribe(@subscriber)
     end
+
+    # WARNING: this implementation is not thread-safe
+    def disabled
+      previous_value = configuration.enabled
+      configuration.enabled = false
+      yield
+    ensure
+      configuration.enabled = previous_value
+    end
   end
 end
 

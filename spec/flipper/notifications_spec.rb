@@ -139,5 +139,25 @@ RSpec.describe Flipper::Notifications do
         expect(notifier).not_to have_received(:call)
       end
     end
+
+    describe "temporarily disabling notifications" do
+      it "does not notify on events within the block passed to #disabled" do
+        Flipper::Notifications.disabled do
+          Flipper.add(:test)
+        end
+
+        expect(notifier).not_to have_received(:call)
+      end
+
+      it "restores the previously configured value after the block is run" do
+        described_class.configuration.enabled = true
+        described_class.disabled { Flipper.add(:test) }
+        expect(described_class.configuration.enabled).to be true
+
+        described_class.configuration.enabled = false
+        described_class.disabled { Flipper.add(:test) }
+        expect(described_class.configuration.enabled).to be false
+      end
+    end
   end
 end
