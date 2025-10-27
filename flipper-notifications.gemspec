@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.executables   = []
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "activesupport", ">= 7", "< 8.1"
+  spec.add_runtime_dependency "activesupport", ">= 7", "< 8.2"
   spec.add_runtime_dependency "flipper", ">= 0.24", "< 2.0"
   spec.add_runtime_dependency "httparty", "~> 0.17"
 
@@ -41,5 +41,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "webmock"
 
-  spec.add_development_dependency "activejob", ">= 7", "< 8.1"
+  spec.add_development_dependency "activejob", ">= 7", "< 8.2"
 end

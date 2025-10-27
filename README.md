@@ -24,7 +24,7 @@ Or install it yourself as:
 ## Dependencies
 
 * Ruby 3
-* ActiveSupport 7
+* ActiveSupport 7+
 
 This gem is designed to work within a Rails app. At the very least, you will
 need `activesupport` since that library drives instrumentation from Flipper

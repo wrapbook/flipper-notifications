@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    flipper-notifications (0.1.7)
-      activesupport (>= 7, < 8.1)
+    flipper-notifications (0.1.8)
+      activesupport (>= 7, < 8.2)
       flipper (>= 0.24, < 2.0)
       httparty (~> 0.17)
 
@@ -103,9 +103,10 @@ GEM
 PLATFORMS
   arm64-darwin-21
   arm64-darwin-23
+  arm64-darwin-24
 
 DEPENDENCIES
-  activejob (>= 7, < 8.1)
+  activejob (>= 7, < 8.2)
   bundler
   bundler-gem_version_tasks
   debug
@@ -117,4 +118,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   2.3.11
+   2.6.9
