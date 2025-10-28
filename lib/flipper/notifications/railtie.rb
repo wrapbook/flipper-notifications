@@ -10,11 +10,13 @@ module Flipper
 
       initializer "flipper-notifications.configure_rails_initialization" do
         Flipper::Notifications.subscribe!
+      end
 
-        config.active_job.custom_serializers += [
+      config.to_prepare do
+        ActiveJob::Serializers.add_serializers(
           EventSerializer,
           Webhooks::Serializer
-        ]
+        )
       end
 
       config.after_initialize do
