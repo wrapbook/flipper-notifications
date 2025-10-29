@@ -8,6 +8,10 @@ module Flipper
     module Webhooks
       class Serializer < ActiveJob::Serializers::ObjectSerializer
 
+        def klass
+          Webhook
+        end
+
         def serialize?(argument)
           argument.is_a?(Webhook)
         end

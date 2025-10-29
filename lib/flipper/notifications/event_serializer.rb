@@ -7,6 +7,10 @@ module Flipper
   module Notifications
     class EventSerializer < ActiveJob::Serializers::ObjectSerializer
 
+      def klass
+        FeatureEvent
+      end
+
       def serialize?(argument)
         argument.is_a?(FeatureEvent)
       end

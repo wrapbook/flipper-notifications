@@ -3,7 +3,7 @@
 require "test_helper"
 require "minitest/autorun"
 
-class TestFlipperNotifications < Minitest::Test
+class TestFlipperNotifications < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
   def setup
