@@ -29,3 +29,18 @@ jobs:
         run: ruby -v
       - name: Run tests
         run: bundle exec rspec
+
+  test_ruby_3_0:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+      - name: Ruby version
+        run: ruby -v
+      - name: Install dependencies
+        run: gem install bundler -v 2.3.11 && bundle _2.3.11_ install
+      - name: Run tests
+        run: bundle exec rspec
