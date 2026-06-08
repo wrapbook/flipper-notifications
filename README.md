@@ -53,6 +53,26 @@ Flipper::Notifications.configure do |config|
 end
 ```
 
+### Slack invalid_blocks Errors
+
+Slack limits the size of webhook messages.  The Slack API returns a 400 status
+code in these cases with a message of `invalid_blocks`. If your feature is
+enabled for a lot of actors or a lot of groups, the length of the list of
+actor or group names can exceed Slack's limit.  To avoid these errors, you
+may configure a character limit sent in webhooks by configuring a
+`webhook_character_limit` in your initializer:
+
+```ruby
+# config/initializers/flipper.rb
+
+Flipper::Notifications.configure do |config|
+  config.webhook_character_limit = 40_000
+end
+```
+
+If you set this value, webhook messages will be shortened whenever they
+exceed the configured character limit.
+
 ### Implementing Your Own Webhooks
 
 This gem provides an implementation to send notifications to Slack via an

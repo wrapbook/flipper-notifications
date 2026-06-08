@@ -94,6 +94,10 @@ RSpec.describe Flipper::Notifications::FeatureEvent do
   describe "#feature_enabled_settings_markdown" do
     subject(:markdown) { event.feature_enabled_settings_markdown }
 
+    before do
+      Flipper::Notifications.configuration.webhook_character_limit = nil
+    end
+
     context "when the feature is fully enabled" do
       before do
         feature.enable
@@ -140,6 +144,20 @@ RSpec.describe Flipper::Notifications::FeatureEvent do
         feature.enable_actor(user3)
 
         expect(markdown).to match(/Actors: #{user.flipper_id}, #{user2.flipper_id} and #{user3.flipper_id}/)
+      end
+
+      it "includes a number of actors that exceeds the markdown_list_item_limit" do
+        Flipper::Notifications.configuration.webhook_character_limit = 60
+
+        user = User.new(id: 1)
+        user2 = User.new(id: 2)
+        user3 = User.new(id: 3)
+        feature.enable_actor(user)
+        feature.enable_actor(user2)
+        feature.enable_actor(user3)
+
+        expect(markdown).not_to match(/Actors: #{user.flipper_id}, #{user2.flipper_id} and #{user3.flipper_id}/)
+        expect(markdown).to match(/3 Actors/)
       end
 
       it "includes percentage of actors" do

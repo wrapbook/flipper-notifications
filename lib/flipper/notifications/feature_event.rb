@@ -40,7 +40,7 @@ module Flipper
       def feature_enabled_settings_markdown
         return "" unless feature.conditional?
 
-        [].tap do |settings|
+        markdown = [].tap do |settings|
           settings << "The feature is now enabled for:" if feature.conditional?
 
           settings << "- Groups: #{to_sentence(feature.enabled_groups.map(&:name).sort)}" if feature.enabled_groups.any?
@@ -53,6 +53,11 @@ module Flipper
 
           settings << "- #{feature.percentage_of_time_value}% of the time" if feature.percentage_of_time_value.positive?
         end.join("\n")
+
+        character_limit = Flipper::Notifications.configuration.webhook_character_limit
+        return markdown if character_limit.nil? || markdown.length <= character_limit
+
+        shortened_feature_enabled_settings_markdown[0...character_limit]
       end
 
       def noteworthy?
@@ -95,6 +100,21 @@ module Flipper
         else
           "#{words[0...-1].join(', ')} and #{words.last}"
         end
+      end
+
+      def shortened_feature_enabled_settings_markdown
+        [].tap do |settings|
+          settings << "The feature is now enabled for:" if feature.conditional?
+
+          settings << "#{feature.enabled_groups.size} Groups" if feature.enabled_groups.any?
+          settings << "#{feature.actors_value.size} Actors" if feature.actors_value.any?
+
+          if feature.percentage_of_actors_value.positive?
+            settings << "- #{feature.percentage_of_actors_value}% of actors"
+          end
+
+          settings << "- #{feature.percentage_of_time_value}% of the time" if feature.percentage_of_time_value.positive?
+        end.join("\n")
       end
 
     end

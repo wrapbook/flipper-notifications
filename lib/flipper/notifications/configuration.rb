@@ -7,9 +7,10 @@ module Flipper
       def initialize
         @enabled   = false
         @notifiers = []
+        @webhook_character_limit = nil
       end
 
-      attr_accessor :enabled, :notifiers
+      attr_accessor :enabled, :notifiers, :webhook_character_limit
 
       def enabled?
         @enabled
