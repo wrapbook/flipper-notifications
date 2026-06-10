@@ -30,6 +30,9 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   Enabled: false
 
+Metrics/PerceivedComplexity:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 
