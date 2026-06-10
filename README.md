@@ -66,7 +66,7 @@ may configure a character limit sent in webhooks by configuring a
 # config/initializers/flipper.rb
 
 Flipper::Notifications.configure do |config|
-  config.webhook_character_limit = 40_000
+  config.webhook_character_limit = 3_000
 end
 ```
 
