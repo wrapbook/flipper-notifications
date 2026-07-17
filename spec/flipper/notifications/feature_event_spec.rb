@@ -45,6 +45,24 @@ RSpec.describe Flipper::Notifications::FeatureEvent do
     end
   end
 
+  describe "state source (config.flipper)" do
+    after { Flipper::Notifications.configuration.flipper = nil }
+
+    it "reads feature state from the configured Flipper instance, not the global one" do
+      # The configured instance has the feature ENABLED; the global one does not.
+      # This mirrors a caching adapter where the global (reading) instance is
+      # stale while the source of truth already reflects the change.
+      source_of_truth = Flipper.new(Flipper::Adapters::Memory.new)
+      source_of_truth.enable(feature_name)
+      Flipper::Notifications.configuration.flipper = source_of_truth
+
+      expect(Flipper.feature(feature_name).off?).to be(true) # global is stale/off
+
+      event = described_class.new(feature_name: feature_name, operation: "enable")
+      expect(event.summary_markdown).to eq("Feature *#{feature_name}* was updated. The feature is now *fully enabled.*")
+    end
+  end
+
   describe "#summary_markdown" do
     subject(:summary_markdown) { event.summary_markdown }
 

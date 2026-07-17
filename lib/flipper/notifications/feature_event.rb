@@ -20,7 +20,7 @@ module Flipper
       end
 
       def initialize(feature_name:, operation:)
-        @feature   = Flipper.feature(feature_name)
+        @feature   = Flipper::Notifications.configuration.flipper.feature(feature_name)
         @operation = operation.to_s
       end
 

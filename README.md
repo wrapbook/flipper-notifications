@@ -53,6 +53,34 @@ Flipper::Notifications.configure do |config|
 end
 ```
 
+### Stale State with Cached Adapters
+
+Notifications are rendered inside a background job (`WebhookNotificationJob`),
+which may run in a **different process** from the one that changed the feature.
+The message ("The feature is now fully enabled/disabled", the list of groups,
+actors, and percentages) is built by reading the feature's current state at
+job-run time.
+
+If your Flipper adapter is fronted by a **per-process cache** — for example an
+in-memory `ActiveSupportCacheStore` layer — the process running the job can hold
+a stale value: enabling a feature in your web process does not invalidate a
+worker's in-memory cache. The notification then reports the wrong state.
+
+By default state is read through the global `Flipper`. Point `config.flipper` at
+a cache-free instance backed by your source of truth so notifications always
+render the real value:
+
+```ruby
+# config/initializers/flipper.rb
+
+Flipper::Notifications.configure do |config|
+  config.flipper = Flipper.new(Flipper::Adapters::ActiveRecord.new)
+end
+```
+
+This only affects how notifications **read** state; your application keeps using
+its cached `Flipper` everywhere else.
+
 ### Slack invalid_blocks Errors
 
 Slack limits the size of webhook messages.  The Slack API returns a 400 status
