@@ -11,6 +11,10 @@ gem "bootsnap", require: false
 gem "flipper"
 gem "flipper-notifications", path: "../../.."
 
+# ponytail: Rails < 8.1 patches Minitest::Runnable.run, which minitest 6
+# renamed to .run_suite. Drop this pin when the oldest appraisal is Rails 8.1.
+gem "minitest", "< 6"
+
 group :development, :test do
   gem "appraisal"
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
