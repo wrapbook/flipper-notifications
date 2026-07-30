@@ -9,6 +9,7 @@ gem "puma", "~> 5.0"
 gem "bootsnap", require: false
 gem "flipper"
 gem "flipper-notifications", path: "../../../.."
+gem "minitest", "< 6"
 
 group :development, :test do
   gem "appraisal"
