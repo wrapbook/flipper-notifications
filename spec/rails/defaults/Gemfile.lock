@@ -206,6 +206,7 @@ DEPENDENCIES
   dotenv-rails
   flipper
   flipper-notifications!
+  minitest (< 6)
   puma (~> 5.0)
   rails (~> 7.0.4)
   web-console
