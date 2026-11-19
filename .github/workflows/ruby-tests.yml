@@ -16,6 +16,7 @@ jobs:
     strategy:
       matrix:
         ruby_version:
+          - '3.3'
           - '.ruby-version'
 
     steps:
