@@ -7,10 +7,10 @@ module Flipper
   module Notifications
     class FeaturesSubscriber
 
-      def call(*args)
+      def call(*)
         return unless enabled?
 
-        event = FeatureEvent.from_active_support(event: ActiveSupport::Notifications::Event.new(*args))
+        event = FeatureEvent.from_active_support(event: ActiveSupport::Notifications::Event.new(*))
         Flipper::Notifications.notify(event: event) if event.noteworthy?
       end
 
