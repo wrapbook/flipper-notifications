@@ -23,7 +23,7 @@ Or install it yourself as:
 
 ## Dependencies
 
-* Ruby 3
+* Ruby 3.3+
 * ActiveSupport 7+
 
 This gem is designed to work within a Rails app. At the very least, you will
