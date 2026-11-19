@@ -1,7 +1,7 @@
 PATH
   remote: ../../..
   specs:
-    flipper-notifications (0.1.8)
+    flipper-notifications (0.1.11)
       activesupport (>= 7, < 8.2)
       flipper (>= 0.24, < 2.0)
       httparty (~> 0.17)
@@ -212,7 +212,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.4.13p195
 
 BUNDLED WITH
    2.6.3

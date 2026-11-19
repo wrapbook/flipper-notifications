@@ -27,7 +27,7 @@ module Flipper
       attr_reader :feature, :operation
 
       def summary_markdown
-        msg = String.new("Feature *#{feature.name}* was #{action_taken}.")
+        msg = "Feature *#{feature.name}* was #{action_taken}."
 
         if include_state?
           msg << " The feature is now *fully enabled.*" if feature.on?
