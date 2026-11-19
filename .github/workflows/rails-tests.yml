@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         ruby_version:
-          - 3.2
+          - '.ruby-version'
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby
