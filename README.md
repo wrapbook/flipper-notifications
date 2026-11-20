@@ -190,6 +190,7 @@ git checkout main
 git pull
 bundle exec rake version:bump:<major, minor, or patch>
 bundle exec rubocop -a
+bundle install --gemfile=spec/rails/defaults/Gemfile
 git commit -a --amend --no-edit
 bundle exec rake release
 ```
