@@ -41,11 +41,14 @@ module Flipper
 
     # WARNING: this implementation is not thread-safe
     def disabled
-      previous_value = configuration.enabled
-      configuration.enabled = false
-      yield
-    ensure
-      configuration.enabled = previous_value
+      return yield unless configuration.enabled?
+
+      begin
+        configuration.enabled = false
+        yield
+      ensure
+        configuration.enabled = true
+      end
     end
   end
 end

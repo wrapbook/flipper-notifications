@@ -158,6 +158,22 @@ RSpec.describe Flipper::Notifications do
         described_class.disabled { Flipper.add(:test) }
         expect(described_class.configuration.enabled).to be false
       end
+
+      it "does not change the configuration when notifications are already disabled" do
+        described_class.configuration.enabled = false
+        allow(described_class.configuration).to receive(:enabled=)
+
+        described_class.disabled { Flipper.add(:test) }
+
+        expect(described_class.configuration).not_to have_received(:enabled=)
+      end
+
+      it "returns the value of the block" do
+        expect(described_class.disabled { 1 }).to eq(1)
+
+        described_class.configuration.enabled = false
+        expect(described_class.disabled { 1 }).to eq(1)
+      end
     end
   end
 end
